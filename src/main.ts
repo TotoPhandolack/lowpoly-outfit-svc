@@ -39,6 +39,10 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, document);
 
   const port = Number(config.get<string>('PORT') ?? 3001);
-  await app.listen(port, '0.0.0.0');
+  await app.listen(port);
 }
-bootstrap();
+
+bootstrap().catch((error: unknown) => {
+  console.error('NestJS bootstrap failed:', error);
+  process.exitCode = 1;
+});
