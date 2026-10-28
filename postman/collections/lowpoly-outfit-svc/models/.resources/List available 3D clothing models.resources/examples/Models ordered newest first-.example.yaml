@@ -1,0 +1,45 @@
+$kind: http-example
+name: Models ordered newest first.
+request:
+  url: "{{baseUrl}}/models?category=shoes"
+  method: GET
+  headers:
+    Accept: application/json
+  queryParams:
+    category: shoes
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": [
+          {
+            "id": "1664cb43-2e46-ab11-3b77-fff87c78c008",
+            "name": "string",
+            "category": "shoes",
+            "modelUrl": "http://dGBxZhyUadtvr.tzgcxAqqMNiVC5tmPR",
+            "fileSize": 5765,
+            "createdAt": "2017-03-18T10:28:00.119Z",
+            "description": "string",
+            "thumbnailUrl": "http://AqkMhEgEwGgpWEoruJFzIcnM.xioStkNza7Z5KjN9TKI"
+          },
+          {
+            "id": "40f22e98-481e-ebb5-052a-f33289009271",
+            "name": "string",
+            "category": "necklace",
+            "modelUrl": "https://vTIZIYKpL.leLGcn9ifUB",
+            "fileSize": 8460,
+            "createdAt": "1986-12-20T01:30:37.504Z",
+            "description": "string",
+            "thumbnailUrl": "http://gzMKgRBgazsOQHmrxRm.sjqjTUiFPTpm0dLiR1S0tO6abqt,fKKomRp8R71Zlaxlgf4fY,L,M"
+          }
+        ]
+      }
+order: 1000

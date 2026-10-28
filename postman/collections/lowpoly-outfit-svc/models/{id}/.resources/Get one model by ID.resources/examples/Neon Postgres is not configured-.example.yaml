@@ -1,0 +1,22 @@
+$kind: http-example
+name: Neon Postgres is not configured.
+request:
+  url: "{{baseUrl}}/models/:id"
+  method: GET
+  pathVariables:
+    - key: id
+      value: b09845df-a3ad-cf37-22c7-8621514fa870
+      disabled: false
+      description: "(Required) "
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 503
+  statusText: Service Unavailable
+  headers:
+    Content-Type: text/plain
+  body:
+    type: text
+    content: ""
+order: 4000

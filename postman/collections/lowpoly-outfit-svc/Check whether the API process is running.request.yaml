@@ -1,0 +1,9 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/health"
+method: GET
+headers:
+  Accept: application/json
+settings: {}
+examples: ./.resources/Check whether the API process is running.resources/examples
+order: 1000

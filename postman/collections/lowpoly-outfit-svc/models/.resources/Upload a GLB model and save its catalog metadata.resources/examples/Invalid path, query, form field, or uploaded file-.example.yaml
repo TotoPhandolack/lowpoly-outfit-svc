@@ -1,0 +1,41 @@
+$kind: http-example
+name: Invalid path, query, form field, or uploaded file.
+request:
+  url: "{{baseUrl}}/models"
+  method: POST
+  headers:
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  body:
+    type: formdata
+    content:
+      - type: file
+        key: model
+        src: ""
+        description: (Required) GLB file, up to 50 MB.
+      - type: text
+        key: name
+        value: string
+        description: "(Required) "
+      - type: text
+        key: category
+        value: necklace
+        description: "(Required) "
+      - type: file
+        key: thumbnail
+        src: ""
+        description: Optional JPEG, PNG, or WebP image, up to 5 MB.
+      - type: text
+        key: description
+        value: string
+        description: ""
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    Content-Type: text/plain
+  body:
+    type: text
+    content: ""
+order: 2000

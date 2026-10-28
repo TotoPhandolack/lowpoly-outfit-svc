@@ -1,0 +1,16 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/models/:id"
+method: DELETE
+pathVariables:
+  - key: id
+    value: b09845df-a3ad-cf37-22c7-8621514fa870
+    disabled: false
+    description: "(Required) "
+auth:
+  type: bearer
+  credentials:
+    token: "{{bearerToken}}"
+settings: {}
+examples: ./.resources/Delete a model record and its Cloudinary files.resources/examples
+order: 2000

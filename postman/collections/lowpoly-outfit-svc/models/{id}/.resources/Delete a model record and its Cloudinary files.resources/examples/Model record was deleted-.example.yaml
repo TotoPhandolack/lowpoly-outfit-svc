@@ -1,0 +1,26 @@
+$kind: http-example
+name: Model record was deleted.
+request:
+  url: "{{baseUrl}}/models/:id"
+  method: DELETE
+  headers:
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  pathVariables:
+    - key: id
+      value: b09845df-a3ad-cf37-22c7-8621514fa870
+      disabled: false
+      description: "(Required) "
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 204
+  statusText: No Content
+  headers:
+    Content-Type: text/plain
+  body:
+    type: text
+    content: ""
+order: 1000

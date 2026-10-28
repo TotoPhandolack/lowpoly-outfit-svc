@@ -1,0 +1,4 @@
+workflows:
+  syncSpecToCollection:
+    - spec: ../postman/specs/lowpoly-outfit.openapi.yaml
+      collection: ../postman/collections/lowpoly-outfit-svc

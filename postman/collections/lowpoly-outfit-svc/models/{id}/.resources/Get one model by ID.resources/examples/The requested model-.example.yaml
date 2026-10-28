@@ -1,0 +1,36 @@
+$kind: http-example
+name: The requested model.
+request:
+  url: "{{baseUrl}}/models/:id"
+  method: GET
+  headers:
+    Accept: application/json
+  pathVariables:
+    - key: id
+      value: b09845df-a3ad-cf37-22c7-8621514fa870
+      disabled: false
+      description: "(Required) "
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": {
+          "id": "7a320532-9b39-1a0f-296b-a37ab5b36700",
+          "name": "string",
+          "category": "hat",
+          "modelUrl": "https://Mh.ufxBGJFKhf7RjX82kc,-o0zj.VgNJsPalxaRgXQ",
+          "fileSize": 2064,
+          "createdAt": "1973-09-20T04:05:04.737Z",
+          "description": "string",
+          "thumbnailUrl": "https://isgT.kgzb7pjw07HnMXT0Nji0xpkuk4StaXdjqdWDNZF+DQ-uVksjAaF"
+        }
+      }
+order: 1000

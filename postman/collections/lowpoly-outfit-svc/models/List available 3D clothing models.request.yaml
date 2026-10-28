@@ -1,0 +1,11 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/models?category=shoes"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  category: shoes
+settings: {}
+examples: ./.resources/List available 3D clothing models.resources/examples
+order: 1000

@@ -1,0 +1,5 @@
+$kind: collection
+description: Model catalog API for the lowpoly-outfit 3D studio.
+variables:
+  baseUrl: http://localhost:3001/api/v1
+  bearerToken: ""

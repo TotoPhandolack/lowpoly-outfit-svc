@@ -1,0 +1,36 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/models"
+method: POST
+headers:
+  Content-Type: multipart/form-data
+  Accept: application/json
+body:
+  type: formdata
+  content:
+    - type: file
+      key: model
+      src: ""
+      description: (Required) GLB file, up to 50 MB.
+    - type: text
+      key: name
+      value: string
+      description: "(Required) "
+    - type: text
+      key: category
+      value: necklace
+      description: "(Required) "
+    - type: file
+      key: thumbnail
+      src: ""
+      description: Optional JPEG, PNG, or WebP image, up to 5 MB.
+    - type: text
+      key: description
+      value: string
+auth:
+  type: bearer
+  credentials:
+    token: "{{bearerToken}}"
+settings: {}
+examples: ./.resources/Upload a GLB model and save its catalog metadata.resources/examples
+order: 2000

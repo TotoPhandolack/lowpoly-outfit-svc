@@ -1,0 +1,214 @@
+openapi: 3.1.0
+info:
+  title: lowpoly-outfit-svc
+  version: 1.0.0
+  description: Model catalog API for the lowpoly-outfit 3D studio.
+servers:
+  - url: http://localhost:3001/api/v1
+    description: Local development
+tags:
+  - name: health
+  - name: models
+paths:
+  /health:
+    get:
+      tags: [health]
+      operationId: getHealth
+      summary: Check whether the API process is running
+      responses:
+        '200':
+          description: API process is running.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              example:
+                status: ok
+                service: lowpoly-outfit-svc
+  /models:
+    get:
+      tags: [models]
+      operationId: listModels
+      summary: List available 3D clothing models
+      parameters:
+        - name: category
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/ModelCategory'
+      responses:
+        '200':
+          description: Models ordered newest first.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Model'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '503':
+          $ref: '#/components/responses/DatabaseUnavailable'
+    post:
+      tags: [models]
+      operationId: uploadModel
+      summary: Upload a GLB model and save its catalog metadata
+      security:
+        - AdminToken: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [model, name, category]
+              properties:
+                model:
+                  type: string
+                  format: binary
+                  description: GLB file, up to 50 MB.
+                thumbnail:
+                  type: string
+                  format: binary
+                  description: Optional JPEG, PNG, or WebP image, up to 5 MB.
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 120
+                category:
+                  $ref: '#/components/schemas/ModelCategory'
+                description:
+                  type: string
+                  maxLength: 500
+      responses:
+        '201':
+          description: Model metadata and Cloudinary URLs were saved.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Model'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '413':
+          description: Uploaded file is too large.
+        '503':
+          $ref: '#/components/responses/Unavailable'
+  /models/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      tags: [models]
+      operationId: getModel
+      summary: Get one model by ID
+      responses:
+        '200':
+          description: The requested model.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Model'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '503':
+          $ref: '#/components/responses/DatabaseUnavailable'
+    delete:
+      tags: [models]
+      operationId: deleteModel
+      summary: Delete a model record and its Cloudinary files
+      security:
+        - AdminToken: []
+      responses:
+        '204':
+          description: Model record was deleted.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '503':
+          $ref: '#/components/responses/Unavailable'
+components:
+  securitySchemes:
+    AdminToken:
+      type: http
+      scheme: bearer
+      bearerFormat: API admin token
+  schemas:
+    ModelCategory:
+      type: string
+      enum: [hat, shirt, pant, shoes, necklace]
+    Model:
+      type: object
+      required:
+        - id
+        - name
+        - category
+        - modelUrl
+        - fileSize
+        - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        category:
+          $ref: '#/components/schemas/ModelCategory'
+        description:
+          type: [string, 'null']
+        modelUrl:
+          type: string
+          format: uri
+          description: Public Cloudinary URL for the GLB model.
+        thumbnailUrl:
+          type: [string, 'null']
+          format: uri
+        fileSize:
+          type: integer
+          minimum: 1
+          description: Original file size in bytes.
+        createdAt:
+          type: string
+          format: date-time
+    HealthResponse:
+      type: object
+      required: [status, service]
+      properties:
+        status:
+          type: string
+          const: ok
+        service:
+          type: string
+  responses:
+    BadRequest:
+      description: Invalid path, query, form field, or uploaded file.
+    Unauthorized:
+      description: The admin bearer token is missing or invalid.
+    NotFound:
+      description: No model exists with the requested ID.
+    Unavailable:
+      description: Neon Postgres or Cloudinary credentials are not configured.
+    DatabaseUnavailable:
+      description: Neon Postgres is not configured.

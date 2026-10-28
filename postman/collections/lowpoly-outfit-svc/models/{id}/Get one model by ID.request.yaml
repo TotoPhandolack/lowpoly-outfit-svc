@@ -1,0 +1,14 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/models/:id"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: b09845df-a3ad-cf37-22c7-8621514fa870
+    disabled: false
+    description: "(Required) "
+settings: {}
+examples: ./.resources/Get one model by ID.resources/examples
+order: 1000

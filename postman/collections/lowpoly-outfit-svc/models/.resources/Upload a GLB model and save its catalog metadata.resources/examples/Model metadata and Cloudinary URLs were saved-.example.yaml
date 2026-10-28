@@ -1,0 +1,55 @@
+$kind: http-example
+name: Model metadata and Cloudinary URLs were saved.
+request:
+  url: "{{baseUrl}}/models"
+  method: POST
+  headers:
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+    - key: Accept
+      value: application/json
+  body:
+    type: formdata
+    content:
+      - type: file
+        key: model
+        src: ""
+        description: (Required) GLB file, up to 50 MB.
+      - type: text
+        key: name
+        value: string
+        description: "(Required) "
+      - type: text
+        key: category
+        value: necklace
+        description: "(Required) "
+      - type: file
+        key: thumbnail
+        src: ""
+        description: Optional JPEG, PNG, or WebP image, up to 5 MB.
+      - type: text
+        key: description
+        value: string
+        description: ""
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": {
+          "id": "7a320532-9b39-1a0f-296b-a37ab5b36700",
+          "name": "string",
+          "category": "hat",
+          "modelUrl": "https://Mh.ufxBGJFKhf7RjX82kc,-o0zj.VgNJsPalxaRgXQ",
+          "fileSize": 2064,
+          "createdAt": "1973-09-20T04:05:04.737Z",
+          "description": "string",
+          "thumbnailUrl": "https://isgT.kgzb7pjw07HnMXT0Nji0xpkuk4StaXdjqdWDNZF+DQ-uVksjAaF"
+        }
+      }
+order: 1000
