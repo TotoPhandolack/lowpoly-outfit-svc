@@ -7,10 +7,13 @@ const serviceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 const frontendPublic = path.resolve(serviceRoot, '../lowpoly-outfit/public');
 const modelRoot = path.join(frontendPublic, 'models');
 const imageRoot = path.join(frontendPublic, 'images');
-const apiBase = (process.env.API_BASE_URL ?? 'http://localhost:3001/api/v1').replace(/\/$/, '');
+const apiBase = (process.env.API_BASE_URL ?? 'http://127.0.0.1:3001/api/v1')
+  .replace(/^http:\/\/localhost(?=[:/])/i, 'http://127.0.0.1')
+  .replace(/\/$/, '');
 const token = process.env.API_ADMIN_TOKEN;
 
 const folders = {
+  avatar: 'avatar',
   hats: 'hat',
   shirts: 'shirt',
   pants: 'pant',
@@ -39,7 +42,15 @@ function displayName(filename) {
     .replace(/\b\w/g, (character) => character.toUpperCase());
 }
 
-const existingResponse = await fetch(`${apiBase}/models`);
+let existingResponse;
+try {
+  existingResponse = await fetch(`${apiBase}/models`);
+} catch {
+  console.error(
+    `Could not reach ${apiBase}. Start the API with "npm run start:dev" in another terminal, then retry.`,
+  );
+  process.exit(1);
+}
 if (!existingResponse.ok) {
   throw new Error(`Could not read the current catalog (${existingResponse.status}).`);
 }
@@ -54,15 +65,22 @@ let uploaded = 0;
 let skipped = 0;
 let failed = 0;
 
+function findModelFiles(directory) {
+  if (!fs.existsSync(directory)) return [];
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const entryPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) return findModelFiles(entryPath);
+    return entry.isFile() && entry.name.toLowerCase().endsWith('.glb')
+      ? [entryPath]
+      : [];
+  });
+}
+
 for (const [folder, category] of Object.entries(folders)) {
   const categoryPath = path.join(modelRoot, folder);
   if (!fs.existsSync(categoryPath)) continue;
 
-  const modelFiles = fs
-    .readdirSync(categoryPath, { withFileTypes: true })
-    .filter((entry) => entry.isFile() && entry.name.toLowerCase().endsWith('.glb'))
-    .map((entry) => path.join(categoryPath, entry.name))
-    .sort();
+  const modelFiles = findModelFiles(categoryPath).sort();
 
   for (const modelPath of modelFiles) {
     const filename = path.basename(modelPath);

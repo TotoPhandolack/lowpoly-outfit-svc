@@ -29,8 +29,8 @@ npm run db:migrate
 npm run start:dev
 ```
 
-The API listens at `http://localhost:3001/api/v1`; interactive Swagger docs are
-at `http://localhost:3001/docs`. The OpenAPI contract is in
+The API listens at `http://127.0.0.1:3001/api/v1`; interactive Swagger docs are
+at `http://127.0.0.1:3001/docs`. The OpenAPI contract is in
 `postman/specs/lowpoly-outfit.openapi.yaml`; its generated local collection is
 in `postman/collections/lowpoly-outfit-svc`. Set `baseUrl` to
 `http://localhost:3001/api/v1` and keep the admin token in the collection's
@@ -43,8 +43,8 @@ secret `bearerToken` variable.
   optional. The response contains a `data` array with Cloudinary model URLs.
 - `GET /api/v1/models/{id}`: fetch one catalog entry.
 - `POST /api/v1/models`: admin-only `multipart/form-data` upload. Send a GLB in
-  `model`, a display `name`, and a `category` (`hat`, `shirt`, `pant`, `shoes`,
-  or `necklace`). An optional JPEG, PNG, or WebP preview goes in `thumbnail`.
+  `model`, a display `name`, and a `category` (`avatar`, `hat`, `shirt`, `pant`,
+  `shoes`, or `necklace`). An optional JPEG, PNG, or WebP preview goes in `thumbnail`.
   Include `Authorization: Bearer <API_ADMIN_TOKEN>`.
 - `DELETE /api/v1/models/{id}`: admin-only record and Cloudinary asset cleanup.
 
@@ -55,8 +55,9 @@ Keep all provider credentials in `.env` or the hosting provider's secret store.
 ## Import the existing local models
 
 After configuring Neon, Cloudinary, and `API_ADMIN_TOKEN`, start the API and
-run this from the service directory. It uploads the current clothing GLBs and
-matching previews, skipping catalog entries that are already present:
+run this from the service directory. It uploads every GLB under
+`lowpoly-outfit/public/models` (including avatars) and matching previews,
+skipping catalog entries that are already present:
 
 ```powershell
 npm run models:import-local

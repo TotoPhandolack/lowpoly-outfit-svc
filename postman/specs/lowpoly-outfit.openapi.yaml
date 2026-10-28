@@ -29,7 +29,7 @@ paths:
     get:
       tags: [models]
       operationId: listModels
-      summary: List available 3D clothing models
+      summary: List available 3D models
       parameters:
         - name: category
           in: query
@@ -158,7 +158,7 @@ components:
   schemas:
     ModelCategory:
       type: string
-      enum: [hat, shirt, pant, shoes, necklace]
+      enum: [avatar, hat, shirt, pant, shoes, necklace]
     Model:
       type: object
       required:

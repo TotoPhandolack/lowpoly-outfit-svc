@@ -1,0 +1,45 @@
+$kind: http-example
+name: Models ordered newest first.
+request:
+  url: "{{baseUrl}}/models?category=necklace"
+  method: GET
+  headers:
+    Accept: application/json
+  queryParams:
+    category: necklace
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": [
+          {
+            "id": "1d3dce1a-34fe-f76a-4f91-dd5639bc5906",
+            "name": "string",
+            "category": "hat",
+            "modelUrl": "https://EIomIArZIJRmdncttWFMDgKjgFmID.bidhuK.+MCuupmoqZVhTiJ0-J6jIYgybB2q0NZZKU",
+            "fileSize": 5721,
+            "createdAt": "1995-09-26T04:16:17.753Z",
+            "description": "string",
+            "thumbnailUrl": "http://sSYAwVnMBNiVHCyRuoEYHaqGBGBYAPcR.cyhhAndKNVDOfV7ymlVIYxKu5XIA44IrVGHgF8JMyv8VD.GDqro2Wm"
+          },
+          {
+            "id": "1ce66dad-54b3-d2a2-01d4-0c7bdbe783ef",
+            "name": "string",
+            "category": "shirt",
+            "modelUrl": "https://dzGOTOwANCOPQrAAHNWUWKGHBJwqMJ.gtgajQTSQOA3.d,GbEmscKX.GzkPr+C9kKeWlTNPyea1Cb8nDOYp",
+            "fileSize": 9438,
+            "createdAt": "1954-01-24T01:23:51.488Z",
+            "description": "string",
+            "thumbnailUrl": "http://qefgDSo.tgiuOmd0WuSD9uknlYC2GrrkUDwoRU2vYO5GGMI.Bo7Xyl"
+          }
+        ]
+      }
+order: 1000

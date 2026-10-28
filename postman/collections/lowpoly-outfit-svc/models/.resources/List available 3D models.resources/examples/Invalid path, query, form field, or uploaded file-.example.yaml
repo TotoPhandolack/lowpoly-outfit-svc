@@ -1,0 +1,19 @@
+$kind: http-example
+name: Invalid path, query, form field, or uploaded file.
+request:
+  url: "{{baseUrl}}/models?category=necklace"
+  method: GET
+  queryParams:
+    category: necklace
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    Content-Type: text/plain
+  body:
+    type: text
+    content: ""
+order: 2000

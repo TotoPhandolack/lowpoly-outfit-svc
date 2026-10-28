@@ -9,7 +9,7 @@ request:
       description: "Added as a part of security scheme: bearer"
   pathVariables:
     - key: id
-      value: b09845df-a3ad-cf37-22c7-8621514fa870
+      value: f350f685-a2b2-fd09-f753-cd819977cd80
       disabled: false
       description: "(Required) "
   body:

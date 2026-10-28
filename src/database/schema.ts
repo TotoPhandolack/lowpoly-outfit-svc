@@ -9,6 +9,7 @@ import {
 } from 'drizzle-orm/pg-core';
 
 export const MODEL_CATEGORIES = [
+  'avatar',
   'hat',
   'shirt',
   'pant',

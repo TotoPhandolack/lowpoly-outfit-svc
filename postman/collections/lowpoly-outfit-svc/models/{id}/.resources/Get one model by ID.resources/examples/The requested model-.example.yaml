@@ -7,7 +7,7 @@ request:
     Accept: application/json
   pathVariables:
     - key: id
-      value: b09845df-a3ad-cf37-22c7-8621514fa870
+      value: f350f685-a2b2-fd09-f753-cd819977cd80
       disabled: false
       description: "(Required) "
   body:
@@ -23,14 +23,14 @@ response:
     content: |-
       {
         "data": {
-          "id": "7a320532-9b39-1a0f-296b-a37ab5b36700",
+          "id": "4ef5a408-3c96-3f11-ad62-0fe7dce1bfbf",
           "name": "string",
-          "category": "hat",
-          "modelUrl": "https://Mh.ufxBGJFKhf7RjX82kc,-o0zj.VgNJsPalxaRgXQ",
-          "fileSize": 2064,
-          "createdAt": "1973-09-20T04:05:04.737Z",
+          "category": "shirt",
+          "modelUrl": "http://CioTyJiINGqotNqSywJOeAPkmnT.kiWMwkkofou1h.zk1",
+          "fileSize": 6740,
+          "createdAt": "1984-10-13T13:52:00.991Z",
           "description": "string",
-          "thumbnailUrl": "https://isgT.kgzb7pjw07HnMXT0Nji0xpkuk4StaXdjqdWDNZF+DQ-uVksjAaF"
+          "thumbnailUrl": "https://NS.aoILZ8qwbWfCiawX6"
         }
       }
 order: 1000

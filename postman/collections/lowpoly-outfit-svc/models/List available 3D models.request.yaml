@@ -1,0 +1,11 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/models?category=necklace"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  category: necklace
+settings: {}
+examples: ./.resources/List available 3D models.resources/examples
+order: 1000

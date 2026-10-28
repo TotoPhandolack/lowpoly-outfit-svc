@@ -20,7 +20,7 @@ request:
         description: "(Required) "
       - type: text
         key: category
-        value: necklace
+        value: avatar
         description: "(Required) "
       - type: file
         key: thumbnail

@@ -1,0 +1,19 @@
+$kind: http-example
+name: Neon Postgres is not configured.
+request:
+  url: "{{baseUrl}}/models?category=necklace"
+  method: GET
+  queryParams:
+    category: necklace
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 503
+  statusText: Service Unavailable
+  headers:
+    Content-Type: text/plain
+  body:
+    type: text
+    content: ""
+order: 3000
