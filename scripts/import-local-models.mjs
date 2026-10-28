@@ -28,6 +28,13 @@ const thumbnailOverrides = {
   'models/skirts/skirt_polkadot.glb': 'images/skirts/polkadot_skirt_render.jpg',
 };
 
+if (!fs.existsSync(modelRoot)) {
+  console.error(
+    'The local model source folder is missing. This importer is only for the initial Cloudinary migration.',
+  );
+  process.exit(1);
+}
+
 if (!token) {
   console.error('Set API_ADMIN_TOKEN in the environment before running this import.');
   process.exit(1);

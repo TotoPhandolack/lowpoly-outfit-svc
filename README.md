@@ -54,8 +54,9 @@ Keep all provider credentials in `.env` or the hosting provider's secret store.
 
 ## Import the existing local models
 
-After configuring Neon, Cloudinary, and `API_ADMIN_TOKEN`, start the API and
-run this from the service directory. It uploads every GLB under
+This is a one-time migration utility. Before removing the local source models,
+configure Neon, Cloudinary, and `API_ADMIN_TOKEN`, start the API, then run this
+from the service directory. It uploads every GLB under
 `lowpoly-outfit/public/models` (including avatars) and matching previews,
 skipping catalog entries that are already present:
 
